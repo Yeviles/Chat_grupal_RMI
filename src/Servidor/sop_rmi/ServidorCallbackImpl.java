@@ -13,8 +13,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Servidor.dto.clsNicknameUsuario;
 import Cliente.sop_rmi.UsuarioCallbckInt;
+import Servidor.utilidades.UtilidadesArchivosTxt;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 /**
  *
  * @author YENNYFER
@@ -23,10 +27,21 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
     
     private ArrayList<clsNicknameUsuario> listaUsuarios;
     private String usuarioEnLinea;
+    private int totalMensajes;
+      private Date fechaUltimoMjs;
     
     public ServidorCallbackImpl() throws RemoteException {
         super();
         listaUsuarios = new ArrayList<>();
+        this.totalMensajes =0;
+           TimerTask timerTask = new TimerTask() {
+            public void run() {
+                consultarMensajes();
+                mjsTotalUltimoMin();
+            }
+        };
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(timerTask, 0, 60000);
     }
     //Permite registrar un Usuario
     @Override
@@ -60,6 +75,7 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
         String nickNameEmisor = obtenerNickname(nickName);
         
         if (nickName != null) {
+            totalMensajes ++;
             for (int i = 0; i < listaUsuarios.size(); i++) {
                 
                 objUsuarioCallbckInt = listaUsuarios.get(i).getUsuario();
@@ -141,7 +157,77 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
         System.out.println("Invocando metodo usuarios conectados");
         return listaUsuarios.size();
     }
+   
+    
     public ArrayList<clsNicknameUsuario> getListaUsuarios() {
         return listaUsuarios;
     }
+
+    public int getTotalMensajes() {
+        return totalMensajes;
+    }
+    
+    public void mjsTotalUltimoMin()  {
+        System.out.println("Invocando método msgTotalUltimoMin()...");
+      
+        actualizarMjsUsuarios();
+        totalMensajes =0;
+        for (int i = 0; i < this.getListaUsuarios().size(); i++) {
+            totalMensajes += this.getListaUsuarios().get(i).getCantidadMensajes();
+        }
+        restablecerCantidadMensajes();        
+        almacenarMensajes(mensajeCantidadMjs());      
+       
+    }
+    public void setTotalMensajes(int totalMensajes) {
+        this.totalMensajes = totalMensajes;
+    }
+     public String mensajeCantidadMjs(){
+        
+        String mensaje;
+        
+        if (totalMensajes == 0) {
+            mensaje = String.valueOf(fechaUltimoMjs) + "\n No hay mensajes registrados en el último minuto *\n";
+        } else {
+            mensaje = String.valueOf(fechaUltimoMjs) + "\n Cantidad mensajes en el último minuto:  " + totalMensajes + "*\n\n";
+        }
+        return mensaje;
+    }
+    
+    public void restablecerCantidadMensajes() {
+        for (int i = 0; i < this.getListaUsuarios().size(); i++) {
+            this.getListaUsuarios().get(i).setCantidadMensajes(0);
+        }
+    }
+    public void almacenarMensajes(String mensaje) {
+        System.out.println("\n\n Invocando a almacenar mensajes");
+
+        UtilidadesArchivosTxt.escribirArchivo("historialMensajes.txt", mensaje);
+    }
+    public void actualizarMjsUsuarios() {
+        Date fechaActual = new Date();
+        int cantMensajesU = 0;
+          fechaUltimoMjs = fechaActual;
+        for (int i = 0; i <this.getListaUsuarios().size(); i++) {
+            cantMensajesU = this.getListaUsuarios().get(i).getFechaMensajesCliente().size();
+          
+            for (int j = 0; j < cantMensajesU; j++) {
+                Date fechaMensaje = this.getListaUsuarios().get(i).getFechaMensajesCliente().get(j);
+                long difMin = fechaActual.getTime() - fechaMensaje.getTime();
+
+                float minutos = TimeUnit.MILLISECONDS.toMinutes(difMin);
+                if (minutos <= 1) {
+                    fechaUltimoMjs = fechaMensaje;
+                    int cantidad = this.getListaUsuarios().get(i).getCantidadMensajes();
+                    this.getListaUsuarios().get(i).setCantidadMensajes(cantidad + 1);
+                }
+            }
+        }
+    }
+    public String consultarMensajes(){
+        System.out.println("\n\n Invocando a consultar mensajes");
+        String formatos = UtilidadesArchivosTxt.leerArchivo("historialMensajes.txt");
+        return formatos;
+    }
+    
 }

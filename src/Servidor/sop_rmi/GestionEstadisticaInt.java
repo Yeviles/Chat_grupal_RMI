@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public interface GestionEstadisticaInt extends Remote{
     
-    public void almacenarMensajes(String mensaje) throws RemoteException;
      public String consultarMensajes() throws RemoteException;
-    public void mjsTotalUltimoMin() throws RemoteException;
+   
 }
