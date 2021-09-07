@@ -28,7 +28,7 @@ public class ServidorDeObjetos {
         
         try {
             ServidorCallbackImpl objRemoto = new ServidorCallbackImpl();
-            GestionEstadisticaImpl objEstadistica = new GestionEstadisticaImpl(objRemoto);
+            GestionEstadisticaImpl objEstadistica = new GestionEstadisticaImpl();
             
             UtilidadesRegistroS.arrancarNS(numPuertoRMIRegistry);
             UtilidadesRegistroS.RegistrarObjetoRemoto(objRemoto, direccionIpRMIRegistry, numPuertoRMIRegistry, "ServidorChat");

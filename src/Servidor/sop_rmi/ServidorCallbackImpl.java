@@ -34,10 +34,10 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
         super();
         listaUsuarios = new ArrayList<>();
         this.totalMensajes =0;
-           TimerTask timerTask = new TimerTask() {
+        TimerTask timerTask = new TimerTask() {
             public void run() {
-                consultarMensajes();
                 mjsTotalUltimoMin();
+                totalMensajes =0;
             }
         };
         Timer timer = new Timer();
@@ -224,10 +224,6 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
             }
         }
     }
-    public String consultarMensajes(){
-        System.out.println("\n\n Invocando a consultar mensajes");
-        String formatos = UtilidadesArchivosTxt.leerArchivo("historialMensajes.txt");
-        return formatos;
-    }
+    
     
 }

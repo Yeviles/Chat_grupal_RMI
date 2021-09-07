@@ -190,7 +190,6 @@ public class GUIAdministrador extends javax.swing.JFrame {
     private void consultarMensajes(){
         jTextAreaMensajes.setText("");
           try {
-            objGestionEstadisticaInt.mjsTotalUltimoMin();
             mensajes = objGestionEstadisticaInt.consultarMensajes();       
 //            String[] v= mensajes.split("*");
 //            String.
