@@ -5,13 +5,10 @@
  */
 package Servidor.sop_rmi;
 import Cliente.clsFechaHora;
-import Cliente.sop_rmi.UsuarioCallbckImpl;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Servidor.dto.clsNicknameUsuario;
@@ -57,30 +54,8 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
     @Override
     public void enviarMensaje(String mensaje, String nickName) throws RemoteException {
         System.out.println("Invocando enviar mensaje");
-        enviarMensajes(mensaje, nickName);
-    }
-    //Actualiza la lista de contactos activos y notificar al cliente.
-    @Override
-    public boolean desconectarCliente(UsuarioCallbckInt objRefencia,String nickName) {
-        for (int i = 0; i < listaUsuarios.size(); i++) {
-            if (listaUsuarios.get(i).getUsuario().equals(objRefencia)) {
-                listaUsuarios.remove(i);
-                usuariosConectados();
-                try {
-                    fijarUsuariosChat();
-                } catch (RemoteException ex) {
-                    Logger.getLogger(ServidorCallbackImpl.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        return true;
-    }
-    //Hace uso del metodo buscarNickName para conocer el ninckname del usuario que envia el mensaje.
-    
-    //Se utiliza en enviarMensaje
-    private void enviarMensajes(String mensaje, String nickName) throws RemoteException {
         
-        UsuarioCallbckInt objUsuarioCallbckInt;
+         UsuarioCallbckInt objUsuarioCallbckInt;
      
         String nickNameEmisor = obtenerNickname(nickName);
         
@@ -102,7 +77,23 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
             }
         }
     }
-    
+    //Actualiza la lista de contactos activos y notificar al cliente.
+    @Override
+    public boolean desconectarCliente(UsuarioCallbckInt objRefencia,String nickName) {
+        for (int i = 0; i < listaUsuarios.size(); i++) {
+            if (listaUsuarios.get(i).getUsuario().equals(objRefencia)) {
+                listaUsuarios.remove(i);
+                usuariosConectados();
+                try {
+                    fijarUsuariosChat();
+                } catch (RemoteException ex) {
+                    Logger.getLogger(ServidorCallbackImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return true;
+    }
+     
     private String obtenerNickname(String nikname) {
         
         for (int i = 0; i < listaUsuarios.size(); i++) {

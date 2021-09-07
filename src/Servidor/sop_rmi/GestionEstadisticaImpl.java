@@ -6,10 +6,8 @@
 package Servidor.sop_rmi;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import Servidor.sop_rmi.ServidorCallbackImpl;
 import Servidor.utilidades.UtilidadesArchivosTxt;
 import java.util.ArrayList;
 /**
@@ -67,9 +65,9 @@ public class GestionEstadisticaImpl extends UnicastRemoteObject implements Gesti
         String mensaje;
         
         if (totalMensajes == 0) {
-            mensaje = String.valueOf(fechaUltimoMjs) + "\n No hay mensajes registrados en el último minuto";
+            mensaje = String.valueOf(fechaUltimoMjs) + "\n No hay mensajes registrados en el último minuto *\n";
         } else {
-            mensaje = String.valueOf(fechaUltimoMjs) + "\n Cantidad mensajes en el último minuto:  " + totalMensajes ;
+            mensaje = String.valueOf(fechaUltimoMjs) + "\n Cantidad mensajes en el último minuto:  " + totalMensajes + "*\n\n";
         }
         return mensaje;
     }
