@@ -191,8 +191,7 @@ public class GUIAdministrador extends javax.swing.JFrame {
         jTextAreaMensajes.setText("");
           try {
             mensajes = objGestionEstadisticaInt.consultarMensajes();       
-//            String[] v= mensajes.split("*");
-//            String.
+            mensajes = mensajes.replace("*", "\n");
            jTextAreaMensajes.setText(mensajes);
         } catch (RemoteException ex) {
             Logger.getLogger(GUIAdministrador.class.getName()).log(Level.SEVERE, null, ex);

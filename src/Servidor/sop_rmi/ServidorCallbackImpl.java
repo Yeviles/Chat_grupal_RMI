@@ -28,7 +28,7 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
     private ArrayList<clsNicknameUsuario> listaUsuarios;
     private String usuarioEnLinea;
     private int totalMensajes;
-      private Date fechaUltimoMjs;
+    private Date fechaUltimoMjs;
     
     public ServidorCallbackImpl() throws RemoteException {
         super();
@@ -36,7 +36,7 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
         this.totalMensajes =0;
         TimerTask timerTask = new TimerTask() {
             public void run() {
-                mjsTotalUltimoMin();
+                almacenarMensajes(mensajeCantidadMjs());  
                 totalMensajes =0;
             }
         };
@@ -65,6 +65,7 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
         }
         return aux;
     }
+    
     //Permite enviar el mensaje a los diferentes usuarios conectados. 
     @Override
     public void enviarMensaje(String mensaje, String nickName) throws RemoteException {
@@ -93,6 +94,7 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
             }
         }
     }
+    
     //Actualiza la lista de contactos activos y notificar al cliente.
     @Override
     public boolean desconectarCliente(UsuarioCallbckInt objRefencia,String nickName) {
@@ -109,7 +111,13 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
         }
         return true;
     }
-     
+    
+     @Override
+    public int numUsuariosConectado() throws RemoteException {
+        System.out.println("Invocando metodo usuarios conectados");
+        return listaUsuarios.size();
+    }
+      
     private String obtenerNickname(String nikname) {
         
         for (int i = 0; i < listaUsuarios.size(); i++) {
@@ -145,51 +153,45 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
         }
     }
     
-    //LLama al método actualizarNuevoContacto que se encuentra definido en la interface UsuariosCllbckInt del Cliente.
+    /**
+     * LLama al método actualizarNuevoContacto que se encuentra definido en la interface UsuariosCllbckInt del Cliente.
+     * @throws RemoteException 
+     */
     public void fijarUsuariosChat() throws RemoteException {
         
         for (clsNicknameUsuario listaUsuario : listaUsuarios) {
             listaUsuario.getUsuario().actualizarNuevoContacto(usuarioEnLinea);
         }
     }
-     @Override
-    public int numUsuariosConectado() throws RemoteException {
-        System.out.println("Invocando metodo usuarios conectados");
-        return listaUsuarios.size();
-    }
-   
-    
+      
     public ArrayList<clsNicknameUsuario> getListaUsuarios() {
         return listaUsuarios;
-    }
-
-    public int getTotalMensajes() {
-        return totalMensajes;
     }
     
     public void mjsTotalUltimoMin()  {
         System.out.println("Invocando método msgTotalUltimoMin()...");
       
-        actualizarMjsUsuarios();
-        totalMensajes =0;
-        for (int i = 0; i < this.getListaUsuarios().size(); i++) {
-            totalMensajes += this.getListaUsuarios().get(i).getCantidadMensajes();
-        }
-        restablecerCantidadMensajes();        
+       // actualizarMjsUsuarios();
+//        totalMensajes =0;
+//        for (int i = 0; i < this.getListaUsuarios().size(); i++) {
+//            totalMensajes += this.getListaUsuarios().get(i).getCantidadMensajes();
+//        }
+       // restablecerCantidadMensajes();        
         almacenarMensajes(mensajeCantidadMjs());      
        
     }
-    public void setTotalMensajes(int totalMensajes) {
-        this.totalMensajes = totalMensajes;
-    }
-     public String mensajeCantidadMjs(){
+     
+    public String mensajeCantidadMjs(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String fechaActual = dateFormat.format(date);
         
         String mensaje;
         
         if (totalMensajes == 0) {
-            mensaje = String.valueOf(fechaUltimoMjs) + "\n No hay mensajes registrados en el último minuto *\n";
+            mensaje = fechaActual + "\n No hay mensajes registrados en el último minuto *\n";
         } else {
-            mensaje = String.valueOf(fechaUltimoMjs) + "\n Cantidad mensajes en el último minuto:  " + totalMensajes + "*\n\n";
+            mensaje = fechaActual + "\n Cantidad mensajes en el último minuto:  " + totalMensajes + "*\n\n";
         }
         return mensaje;
     }
@@ -199,11 +201,13 @@ public class ServidorCallbackImpl extends UnicastRemoteObject implements Servido
             this.getListaUsuarios().get(i).setCantidadMensajes(0);
         }
     }
+    
     public void almacenarMensajes(String mensaje) {
         System.out.println("\n\n Invocando a almacenar mensajes");
 
         UtilidadesArchivosTxt.escribirArchivo("historialMensajes.txt", mensaje);
     }
+    
     public void actualizarMjsUsuarios() {
         Date fechaActual = new Date();
         int cantMensajesU = 0;

@@ -76,7 +76,7 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
                         + nombre
                         + "</b></font></td><td><img src= '"
                         + this.getClass().getResource("/Recursos/" + msg)
-                        + "' width=50 height=50 /> </td>";
+                        + "' width=40 height=40 /> </td>";
             }
             if (!tieneMensaje) {
                 doc += auxDoc;
@@ -167,6 +167,11 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         pnlPrincipal.setBackground(new java.awt.Color(191, 206, 220));
 
@@ -428,6 +433,15 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
             DesktopNotify.showDesktopMessage("Nueva Notificacion", "Debe ingresar un mensaje", DesktopNotify.TIP, 5000L);
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+         try {
+            objServidorCallbackInt.desconectarCliente(objUsuarioCallbckImpl, nickName);
+        } catch (RemoteException ex) {
+            Logger.getLogger(GUICliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.exit(0);    
+    }//GEN-LAST:event_formWindowClosing
 
     private void setImages() {
         ImageIcon icons[] = new ImageIcon[10];

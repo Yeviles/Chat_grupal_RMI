@@ -16,8 +16,10 @@ import java.rmi.RemoteException;
 public interface ServidorCallbackInt extends  Remote{
     
     public boolean registrarCliente(UsuarioCallbckInt objRefencia, String nickName) throws  RemoteException;
+    
     void enviarMensaje(String mensaje, String nickName)throws  RemoteException;
+   
     public boolean desconectarCliente(UsuarioCallbckInt objReferencia,String nickName)throws RemoteException;
     
-     public int numUsuariosConectado() throws RemoteException;
+    public int numUsuariosConectado() throws RemoteException;
 }

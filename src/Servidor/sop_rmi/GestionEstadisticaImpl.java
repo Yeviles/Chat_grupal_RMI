@@ -14,15 +14,12 @@ import java.util.ArrayList;
  *
  * @author YENNYFER
  */
-public class GestionEstadisticaImpl extends UnicastRemoteObject implements GestionEstadisticaInt{   
-    
+public class GestionEstadisticaImpl extends UnicastRemoteObject implements GestionEstadisticaInt{      
 
     public GestionEstadisticaImpl() throws RemoteException {
         super();
     }
-
-
-    
+   
      @Override
     public String consultarMensajes() throws RemoteException {
         System.out.println("\n\n Invocando a consultar mensajes");

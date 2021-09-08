@@ -1,34 +1,58 @@
-Tue Sep 07 11:52:33 COT 2021
- No hay mensajes registrados en el último minuto *
-Tue Sep 07 11:52:51 COT 2021
- No hay mensajes registrados en el último minuto *
-Tue Sep 07 11:53:51 COT 2021
- No hay mensajes registrados en el último minuto *
-Tue Sep 07 11:53:54 COT 2021
- Cantidad mensajes en el último minuto:  3*
 
-Tue Sep 07 11:53:54 COT 2021
- Cantidad mensajes en el último minuto:  3*
+2021/09/07 23:37:32
+ No hay mensajes registrados en el último minuto *
+2021/09/07 23:38:32
+ Cantidad mensajes en el último minuto:  2*
 
-Tue Sep 07 11:56:51 COT 2021
- No hay mensajes registrados en el último minuto *
-Tue Sep 07 11:57:51 COT 2021
- No hay mensajes registrados en el último minuto *
-Tue Sep 07 11:58:51 COT 2021
- No hay mensajes registrados en el último minuto *
-Tue Sep 07 11:59:17 COT 2021
+2021/09/07 23:39:32
+ Cantidad mensajes en el último minuto:  2*
+
+2021/09/07 23:40:32
  Cantidad mensajes en el último minuto:  1*
 
-Tue Sep 07 11:59:17 COT 2021
+2021/09/07 23:41:32
  Cantidad mensajes en el último minuto:  1*
 
-Tue Sep 07 12:01:51 COT 2021
+2021/09/07 23:42:32
+ Cantidad mensajes en el último minuto:  2*
+
+2021/09/07 23:43:32
  No hay mensajes registrados en el último minuto *
-Tue Sep 07 12:02:51 COT 2021
+2021/09/07 23:44:32
  No hay mensajes registrados en el último minuto *
-Tue Sep 07 12:03:51 COT 2021
+2021/09/07 23:45:01
  No hay mensajes registrados en el último minuto *
-Tue Sep 07 12:04:51 COT 2021
+2021/09/07 23:46:01
  No hay mensajes registrados en el último minuto *
-Tue Sep 07 12:05:51 COT 2021
+2021/09/07 23:47:01
+ Cantidad mensajes en el último minuto:  5*
+
+2021/09/07 23:48:01
+ No hay mensajes registrados en el último minuto *
+2021/09/07 23:49:01
+ No hay mensajes registrados en el último minuto *
+2021/09/07 23:50:01
+ No hay mensajes registrados en el último minuto *
+2021/09/07 23:51:01
+ No hay mensajes registrados en el último minuto *
+2021/09/07 23:52:01
+ No hay mensajes registrados en el último minuto *
+2021/09/07 23:53:01
+ No hay mensajes registrados en el último minuto *
+2021/09/07 23:54:01
+ No hay mensajes registrados en el último minuto *
+2021/09/07 23:55:01
+ No hay mensajes registrados en el último minuto *
+2021/09/07 23:56:01
+ No hay mensajes registrados en el último minuto *
+2021/09/07 23:57:01
+ No hay mensajes registrados en el último minuto *
+2021/09/08 00:00:42
+ No hay mensajes registrados en el último minuto *
+2021/09/08 00:01:42
+ No hay mensajes registrados en el último minuto *
+2021/09/08 00:02:42
+ Cantidad mensajes en el último minuto:  2*
+
+2021/09/08 00:04:57
  No hay mensajes registrados en el último minuto *
