@@ -37,8 +37,9 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
         this.objUsuarioCallbckImpl = new UsuarioCallbckImpl(this);
         this.objServidorCallbackInt = objServidorCallbackInt;
         this.tieneMensaje = false;
-         this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
+        
         registrarNickName(nickname);
         setImages();
         addListeners();

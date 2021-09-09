@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class GUIConexionA extends javax.swing.JFrame {
 
-     private static GestionEstadisticaInt objRemoto;
+     private static GestionEstadisticaInt objGestionEstadisticaInt;
      
     public GUIConexionA() throws RemoteException{
         setTitle("Registrar NS");
@@ -209,9 +209,9 @@ public class GUIConexionA extends javax.swing.JFrame {
         String varNickName = "";
         varIp = txtIp.getText();
         varPuerto = Integer.parseInt(txtNumPuerto.getText());
-        objRemoto = (GestionEstadisticaInt) UtilidadesRegistroC.obtenerObjRemoto(varIp, varPuerto, "ServidorEstadisticas");
-        if (objRemoto != null) {
-            GUIAdministrador objAdmin = new GUIAdministrador(objRemoto);
+        objGestionEstadisticaInt = (GestionEstadisticaInt) UtilidadesRegistroC.obtenerObjRemoto(varIp, varPuerto, "ServidorEstadisticas");
+        if (objGestionEstadisticaInt != null) {
+            GUIAdministrador objAdmin = new GUIAdministrador(objGestionEstadisticaInt);
             objAdmin.setVisible(true);
             this.dispose();
         } else {
