@@ -412,12 +412,7 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        try {
-            objServidorCallbackInt.desconectarCliente(objUsuarioCallbckImpl, nickName);
-        } catch (RemoteException ex) {
-            Logger.getLogger(GUICliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.exit(0);
+        cerrarSesion();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
@@ -436,14 +431,18 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       cerrarSesion();
+    }//GEN-LAST:event_formWindowClosing
+   
+    private void cerrarSesion(){
          try {
             objServidorCallbackInt.desconectarCliente(objUsuarioCallbckImpl, nickName);
         } catch (RemoteException ex) {
             Logger.getLogger(GUICliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.exit(0);    
-    }//GEN-LAST:event_formWindowClosing
-
+        System.exit(0);  
+    }
+             
     private void setImages() {
         ImageIcon icons[] = new ImageIcon[10];
         for (int i = 0; i < 10; i++) {

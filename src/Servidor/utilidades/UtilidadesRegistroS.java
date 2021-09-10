@@ -29,7 +29,7 @@ public class UtilidadesRegistroS {
         } catch (RemoteException e) {
             System.out.println("El rmiRegistry no se localizó en el puerto: " + numPuertoRMI);
 
-            Registry registro = LocateRegistry.createRegistry(numPuertoRMI);
+            LocateRegistry.createRegistry(numPuertoRMI);
             System.out.println("El registro se ha creado en el puerto: " + numPuertoRMI);
         }
     }
