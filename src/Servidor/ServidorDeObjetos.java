@@ -27,12 +27,12 @@ public class ServidorDeObjetos {
         numPuertoRMIRegistry = UtilidadesConsola.leerEntero();  
         
         try {
-            ServidorCallbackImpl objRemoto = new ServidorCallbackImpl();
-            GestionEstadisticaImpl objEstadistica = new GestionEstadisticaImpl();
+            ServidorCallbackImpl objServidorCallbackImpl = new ServidorCallbackImpl();
+            GestionEstadisticaImpl objGestionEstadisticaImpl = new GestionEstadisticaImpl();
             
             UtilidadesRegistroS.arrancarNS(numPuertoRMIRegistry);
-            UtilidadesRegistroS.RegistrarObjetoRemoto(objRemoto, direccionIpRMIRegistry, numPuertoRMIRegistry, "ServidorChat");
-            UtilidadesRegistroS.RegistrarObjetoRemoto(objEstadistica, direccionIpRMIRegistry, numPuertoRMIRegistry, "ServidorEstadisticas");
+            UtilidadesRegistroS.RegistrarObjetoRemoto(objServidorCallbackImpl, direccionIpRMIRegistry, numPuertoRMIRegistry, "ServidorChat");
+            UtilidadesRegistroS.RegistrarObjetoRemoto(objGestionEstadisticaImpl, direccionIpRMIRegistry, numPuertoRMIRegistry, "ServidorEstadisticas");
         } catch (Exception e) {
             System.err.println("No fue posible Arrancar el NS o Registrar el objeto remoto" + e.getMessage());
         }

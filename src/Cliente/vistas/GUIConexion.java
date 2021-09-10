@@ -246,7 +246,7 @@ public class GUIConexion extends javax.swing.JFrame {
         varPuerto = Integer.parseInt(txtNumPuerto.getText());
         varNickName = txtNickName.getText();
         if (!varNickName.equals("")) {
-            objServidorCallbackInt = (ServidorCallbackInt) UtilidadesRegistroC.obtenerObjRemoto(varIp, varPuerto, "ServidorChat");
+            objServidorCallbackInt = (ServidorCallbackInt) UtilidadesRegistroC.obtenerObjRemoto(varIp, varPuerto, "ServidoChat");
             if (objServidorCallbackInt != null) {
                 try {
                     GUICliente objCliente = new GUICliente(objServidorCallbackInt, varNickName);

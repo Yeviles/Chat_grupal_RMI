@@ -29,6 +29,7 @@ public class GUIAdministrador extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         TimerTask timerTask = new TimerTask() {
+            @Override
             public void run() {
                 consultarMensajes();
             }
