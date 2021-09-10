@@ -11,21 +11,21 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * Representa un usuario
  *
- * @author YENNYFER
+ * @author YENNYFER, YEFERSON
  */
-public class clsNicknameUsuario implements Serializable{
-    
+public class clsNicknameUsuario implements Serializable {
+
     private UsuarioCallbckInt usuario;
     private String nickName;
     private int numMensajes;
     private String smiley;
-    
     private ArrayList<Date> fechaMensajesCliente;
 
     public clsNicknameUsuario() {
     }
-    
+
     public clsNicknameUsuario(UsuarioCallbckInt usuario, String nickName) {
         this.usuario = usuario;
         this.nickName = nickName;
@@ -63,10 +63,12 @@ public class clsNicknameUsuario implements Serializable{
     public void setFechaMensajesCliente(Date fechaMensajesCliente) {
         this.fechaMensajesCliente.add(fechaMensajesCliente);
     }
-    public void setCantidadMensajes(int numMesajes){
+
+    public void setCantidadMensajes(int numMesajes) {
         this.numMensajes = numMesajes;
     }
-    public int getCantidadMensajes(){
+
+    public int getCantidadMensajes() {
         return numMensajes;
     }
 }

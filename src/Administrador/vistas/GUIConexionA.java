@@ -11,15 +11,18 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
- *
- * @author YENNYFER
+ * Redirecciona a la vista del administrador y conecta éste al servidor de chat
+ * 
+ * @author YENNYFER, YEFERSON
  */
 public class GUIConexionA extends javax.swing.JFrame {
 
-     private static GestionEstadisticaInt objGestionEstadisticaInt;
+    private static GestionEstadisticaInt objGestionEstadisticaInt;
      
     public GUIConexionA() throws RemoteException{
         setTitle("Registrar NS");
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
         initComponents();
     }
 
@@ -203,12 +206,8 @@ public class GUIConexionA extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
-        String varIp = "";
-        int varPuerto = 0;
-        String varNickName = "";
-        varIp = txtIp.getText();
-        varPuerto = Integer.parseInt(txtNumPuerto.getText());
+        String varIp = txtIp.getText();
+        int varPuerto = Integer.parseInt(txtNumPuerto.getText());
         objGestionEstadisticaInt = (GestionEstadisticaInt) UtilidadesRegistroC.obtenerObjRemoto(varIp, varPuerto, "ServidorEstadisticas");
         if (objGestionEstadisticaInt != null) {
             GUIAdministrador objAdmin = new GUIAdministrador(objGestionEstadisticaInt);
@@ -268,15 +267,12 @@ public class GUIConexionA extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new GUIConexionA().setVisible(true);
-                    
-                } catch (RemoteException ex) {
-                    Logger.getLogger(GUIConexionA.class.getName()).log(Level.SEVERE, null, ex);
-
-                }
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new GUIConexionA().setVisible(true);
+                
+            } catch (RemoteException ex) {
+                Logger.getLogger(GUIConexionA.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }

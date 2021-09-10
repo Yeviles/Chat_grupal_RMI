@@ -6,25 +6,27 @@
 package Cliente.utilidades;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- *
- * @author YENNYFER
+ * 
+ * Metodos estáticos de lectura y escritura
+ * 
+ * @author YENNYFER, YEFERSON
  */
 public class UtilidadesConsola {
     public static int leerEntero() {
-        String linea = "";
+        String linea;
         int opcion = 0;
-        boolean valido = false;
+        boolean valido;
         do {
             try {
-                //System.out.println("Ingrese la opcion: ");
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                 linea = br.readLine();
                 opcion = Integer.parseInt(linea);
                 valido = true;
-            } catch (Exception e) {
+            } catch (IOException | NumberFormatException e) {
                 System.out.println("Error intente nuevamente...");
                 valido = false;
             }
@@ -43,7 +45,7 @@ public class UtilidadesConsola {
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                 linea = br.readLine();
                 valido = true;
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.out.println("Error intente nuevamente...");
                 valido = false;
             }
@@ -61,7 +63,7 @@ public class UtilidadesConsola {
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                 caracter = br.readLine().charAt(0);
                 valido = true;
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.out.println("Error intente nuevamente...");
                 valido = false;
             }

@@ -13,18 +13,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Redirecciona a la vista del cliente y conecta éste al servidor de chat
  *
- * @author YENNYFER
+ * @author YENNYFER, YEFERSON
  */
 public class GUIConexion extends javax.swing.JFrame {
-    
+
     private static ServidorCallbackInt objServidorCallbackInt;
-    
-    public GUIConexion() throws  RemoteException{
+
+    public GUIConexion() throws RemoteException {
         initComponents();
         setTitle("Registrar NS");
-        this.setLocationRelativeTo(null);      
-        this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
@@ -239,14 +238,11 @@ public class GUIConexion extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
-        String varIp = "";
-        int varPuerto = 0;
-        String varNickName = "";
-        varIp = txtIp.getText();
-        varPuerto = Integer.parseInt(txtNumPuerto.getText());
-        varNickName = txtNickName.getText();
+        String varIp = txtIp.getText();
+        int varPuerto = Integer.parseInt(txtNumPuerto.getText());
+        String varNickName = txtNickName.getText();
         if (!varNickName.equals("")) {
-            objServidorCallbackInt = (ServidorCallbackInt) UtilidadesRegistroC.obtenerObjRemoto(varIp, varPuerto, "ServidoChat");
+            objServidorCallbackInt = (ServidorCallbackInt) UtilidadesRegistroC.obtenerObjRemoto(varIp, varPuerto, "ServidorChat");
             if (objServidorCallbackInt != null) {
                 try {
                     GUICliente objCliente = new GUICliente(objServidorCallbackInt, varNickName);
@@ -263,8 +259,8 @@ public class GUIConexion extends javax.swing.JFrame {
             DesktopNotify.showDesktopMessage("Advertencia", "Debe ingresar un nickname", DesktopNotify.TIP, 5000L);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
- 
- /**
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -292,14 +288,12 @@ public class GUIConexion extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new GUIConexion().setVisible(true);
-                } catch (RemoteException ex) {
-                    Logger.getLogger(GUIConexion.class.getName()).log(Level.SEVERE, null, ex);
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new GUIConexion().setVisible(true);
+            } catch (RemoteException ex) {
+                Logger.getLogger(GUIConexion.class.getName()).log(Level.SEVERE, null, ex);
 
-                }
             }
         });
     }

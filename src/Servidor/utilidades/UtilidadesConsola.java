@@ -9,17 +9,18 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 /**
+ * Metodos estáticos de lectura y escritura
  *
- * @author YENNYFER
+ * @author YENNYFER, YEFERSON
  */
 public class UtilidadesConsola {
-     public static int leerEntero() {
+
+    public static int leerEntero() {
         String linea = "";
         int opcion = 0;
         boolean valido = false;
         do {
             try {
-                //System.out.println("Ingrese la opcion: ");
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                 linea = br.readLine();
                 opcion = Integer.parseInt(linea);
@@ -52,6 +53,7 @@ public class UtilidadesConsola {
         return linea;
 
     }
+
     public static char leerCaracter() {
         char caracter = 0;
         boolean valido = false;

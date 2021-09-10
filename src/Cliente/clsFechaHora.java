@@ -8,8 +8,7 @@ package Cliente;
 import java.io.Serializable;
 
 /**
- *
- * @author YENNYFER
+ * @author YENNYFER, YEFERSON
  */
 public class clsFechaHora implements Serializable{
     private String fecha;
@@ -17,7 +16,6 @@ public class clsFechaHora implements Serializable{
 
     public clsFechaHora() {
     }
-
     
     public clsFechaHora(String fecha, String hora) {
         this.fecha = fecha;

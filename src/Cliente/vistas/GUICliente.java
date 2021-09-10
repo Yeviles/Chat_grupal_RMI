@@ -8,7 +8,6 @@ package Cliente.vistas;
 import Cliente.clsFechaHora;
 import Cliente.sop_rmi.UsuarioCallbckImpl;
 import Servidor.dto.clsNicknameUsuario;
-
 import Servidor.sop_rmi.ServidorCallbackInt;
 import ds.desktop.notify.DesktopNotify;
 import java.awt.event.KeyEvent;
@@ -21,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
+ * Interfaz de chat para cada cliente.
  *
  * @author YENNYFER, YEFERSON
  */
@@ -39,13 +39,19 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
         this.tieneMensaje = false;
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        
+
         registrarNickName(nickname);
         setImages();
         addListeners();
-
     }
 
+    /**
+     * Muestra el texto dado en el panel definido como pantalla de chat.
+     *
+     * @param nombre nombre del usuario
+     * @param msg mensaje enviado por el usuario
+     * @param objFechaHoraMensaje fecha y hora del mensaje
+     */
     public void fijarTexto(String nombre, String msg, clsFechaHora objFechaHoraMensaje) {
 
         System.out.println("Mensaje nuevo en el chat");
@@ -65,7 +71,7 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
                 auxDoc = "<tr><td>"
                         + objFechaHoraMensaje.getFecha() + ", " + objFechaHoraMensaje.getHora()
                         + "</td><td><font color='rgb(55,178,204)'><b>"
-                        + nombre
+                        + nombre + ": "
                         + "</b></font></td><td>"
                         + msg
                         + "</td>";
@@ -74,7 +80,7 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
                 auxDoc = "<tr><td>"
                         + objFechaHoraMensaje.getFecha() + ", " + objFechaHoraMensaje.getHora() + "<br>"
                         + "</td><td><font color='rgb(55,178,204)'><b>"
-                        + nombre
+                        + nombre + ": "
                         + "</b></font></td><td><img src= '"
                         + this.getClass().getResource("/Recursos/" + msg)
                         + "' width=40 height=40 /> </td>";
@@ -96,15 +102,25 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
         chatListTextArea.setText(doc);
     }
 
-    public void fijarContacto(String nombre) {
+    /**
+     * Muestra una notificación cuando se conecte un nuevo usuario.
+     *
+     * @param nombre nuevo usuario conectado
+     */
+    public void nuevoContacto(String nombre) {
         System.out.println("Un nuevo usuario ha ingresado al chat");
         try {
-            DesktopNotify.showDesktopMessage("Notificacion", "Nuevo usuario conectado: " +" "+nombre, DesktopNotify.TIP, 5000L);
+            DesktopNotify.showDesktopMessage("Notificacion", "Nuevo usuario conectado: " + " " + nombre, DesktopNotify.TIP, 5000L);
         } catch (Exception ex) {
         }
-
     }
 
+    /**
+     * Muestra el nuevo usuario conectado en el listado correspondiente.
+     *
+     * @param nombre nuevo usuario conectado
+     * @throws RemoteException
+     */
     public void fijarContactos(String nombre) throws RemoteException {
         System.out.println("Actualizar el listado de contactos");
 
@@ -113,6 +129,13 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
 
     }
 
+    /**
+     * Registra el usuario en el servidor, enviando la referencia
+     * correspondiente
+     *
+     * @param prmNickName nuevo usuario
+     * @throws RemoteException
+     */
     public void registrarNickName(String prmNickName) throws RemoteException {
         nickName = prmNickName;
         lbNickName.setText(nickName);
@@ -431,18 +454,25 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       cerrarSesion();
+        cerrarSesion();
     }//GEN-LAST:event_formWindowClosing
-   
-    private void cerrarSesion(){
-         try {
+
+    /**
+     * Realiza el cierre de sesión de forma segura, desconectando el cliente del
+     * servidor
+     */
+    private void cerrarSesion() {
+        try {
             objServidorCallbackInt.desconectarCliente(objUsuarioCallbckImpl, nickName);
         } catch (RemoteException ex) {
             Logger.getLogger(GUICliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.exit(0);  
+        System.exit(0);
     }
-             
+
+    /**
+     * Ubica las imagenes correspondientes a los emojis en la vista
+     */
     private void setImages() {
         ImageIcon icons[] = new ImageIcon[10];
         for (int i = 0; i < 10; i++) {
@@ -460,6 +490,9 @@ public class GUICliente extends javax.swing.JFrame implements MouseListener, Key
         luvLabel.setIcon(icons[9]);
     }
 
+    /**
+     * Agrega el evento de mouse a cada emoji
+     */
     private void addListeners() {
         hpyLabel.addMouseListener(this);
         lghLabel.addMouseListener(this);

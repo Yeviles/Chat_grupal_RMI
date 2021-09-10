@@ -4,15 +4,22 @@
  * and open the template in the editor.
  */
 package Servidor.sop_rmi;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
+
 /**
+ * Define los metodos relacionados a las estadisticas del chat.
  *
- * @author YENNYFER
+ * @author YENNYFER, YEFERSON
  */
-public interface GestionEstadisticaInt extends Remote{
-    
-     public String consultarMensajes() throws RemoteException;
-   
+public interface GestionEstadisticaInt extends Remote {
+
+    /**
+     * Consulta los reportes almacenados en el medio de persistencia
+     * @return Reportes leidos
+     * @throws RemoteException 
+     */
+    public String consultarMensajes() throws RemoteException;
+
 }

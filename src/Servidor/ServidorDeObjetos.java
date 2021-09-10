@@ -9,9 +9,9 @@ import Servidor.sop_rmi.ServidorCallbackImpl;
 import Servidor.utilidades.UtilidadesRegistroS;
 import Servidor.utilidades.UtilidadesConsola;
 import  java.rmi.RemoteException;
+
 /**
- *
- * @author YENNYFER
+ * @author YENNYFER, YEFERSON
  */
 public class ServidorDeObjetos {
     
@@ -33,7 +33,7 @@ public class ServidorDeObjetos {
             UtilidadesRegistroS.arrancarNS(numPuertoRMIRegistry);
             UtilidadesRegistroS.RegistrarObjetoRemoto(objServidorCallbackImpl, direccionIpRMIRegistry, numPuertoRMIRegistry, "ServidorChat");
             UtilidadesRegistroS.RegistrarObjetoRemoto(objGestionEstadisticaImpl, direccionIpRMIRegistry, numPuertoRMIRegistry, "ServidorEstadisticas");
-        } catch (Exception e) {
+        } catch (RemoteException e) {
             System.err.println("No fue posible Arrancar el NS o Registrar el objeto remoto" + e.getMessage());
         }
     }

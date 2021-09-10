@@ -5,18 +5,27 @@
  */
 package Cliente.utilidades;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+
 /**
- *
+ * Utilidades para registrar un cliente
+ * 
  * @author YENNYFER
  */
 public class UtilidadesRegistroC {
+    
+    /**
+     * Obtiene una referencia del objeto remoto registrado en el ns con el 
+     * puerto y la dirección ip dados
+     * @param dirIP direccion ip
+     * @param puerto puerto
+     * @param nameObjReg nombre del objeto remoto
+     * @return Referencia al objeto remoto
+     */
      public static Remote obtenerObjRemoto(String dirIP,int puerto, String nameObjReg)
     {
         String URLRegistro;

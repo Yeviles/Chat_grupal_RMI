@@ -4,19 +4,29 @@
  * and open the template in the editor.
  */
 package Servidor.utilidades;
-import Cliente.utilidades.*;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+
 /**
+ * Utilidades para el registro de un servidor
  *
- * @author YENNYFER
+ * @author YENNYFER, YEFERSON
  */
 public class UtilidadesRegistroS {
-     public static void arrancarNS(int numPuertoRMI) throws RemoteException {
+
+    /**
+     * Pone en marcha el servidor de nombres asignandole el puerto dado y
+     * creando un nuevo registro, si es necesario.
+     *
+     * @param numPuertoRMI puerto
+     * @throws RemoteException
+     */
+    public static void arrancarNS(int numPuertoRMI) throws RemoteException {
         try {
 
             Registry registro = LocateRegistry.getRegistry(numPuertoRMI);
@@ -34,6 +44,14 @@ public class UtilidadesRegistroS {
         }
     }
 
+    /**
+     * Registra el objeto remoto dado en el NS.
+     *
+     * @param objetoRemoto objeto remoto a registrar
+     * @param dirIPNS direccion ip
+     * @param numPuertoNS puerto
+     * @param identificadorObjetoRemoto nombre o identificador del objeto remoto
+     */
     public static void RegistrarObjetoRemoto(Remote objetoRemoto, String dirIPNS, int numPuertoNS, String identificadorObjetoRemoto) {
         String UrlRegistro = "rmi://" + dirIPNS + ":" + numPuertoNS + "/" + identificadorObjetoRemoto;
         try {

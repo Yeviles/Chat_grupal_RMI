@@ -14,20 +14,22 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 /**
- *
- * @author YENNYFER
+ * Interfaz que permite al administrador visualizar un reporte de la cantidad
+ * de mensajes que se han enviado en el último mínuto.
+ * 
+ * @author YENNYFER, YEFERSON
  */
 public class GUIAdministrador extends javax.swing.JFrame {
-
+    
     private static GestionEstadisticaInt objGestionEstadisticaInt;
     private String mensajes;
 
     public GUIAdministrador(GestionEstadisticaInt prmObjeto) {
         objGestionEstadisticaInt = prmObjeto;
         this.mensajes = "";
-        initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        initComponents();
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -188,6 +190,10 @@ public class GUIAdministrador extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    /**
+     * Consulta los mensajes enviados en el último minuto y los muestra en 
+     * una área de texto
+     */
     private void consultarMensajes(){
         jTextAreaMensajes.setText("");
           try {

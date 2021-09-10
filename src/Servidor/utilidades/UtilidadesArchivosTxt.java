@@ -15,16 +15,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
+ * Utilidades para gestión de archivos.
  *
  * @author YENNYFER, YEFERSON
  */
 public class UtilidadesArchivosTxt {
 
+    /**
+     * Lee el archivo que lleva por nombre "nombreArchivo"
+     *
+     * @param nombreArchivo archivo a leer
+     * @return Contenido del archivo
+     */
     public static String leerArchivo(String nombreArchivo) {
         String varLinea;
-        String varLineas ="";
+        String varLineas = "";
         File varArchivo = new File(nombreArchivo);
-         if (varArchivo.exists() == false) {
+        if (varArchivo.exists() == false) {
             try {
                 varArchivo.createNewFile();
             } catch (IOException e) {
@@ -45,7 +52,6 @@ public class UtilidadesArchivosTxt {
 
             System.out.println("\nThe file is empty or doesn't exist. Check your content.");
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println("\nThe file is empty or doesn't exist. Check your content.");
         }
         if (varLineas.isEmpty()) {
@@ -54,6 +60,11 @@ public class UtilidadesArchivosTxt {
         return varLineas;
     }
 
+    /**
+     * Lee una linea del archivo file.txt
+     *
+     * @return Linea leida
+     */
     public static String leerLinea() {
         String varLinea = "";
         try {
@@ -74,7 +85,14 @@ public class UtilidadesArchivosTxt {
         return varLinea;
     }
 
-    public static void escribirArchivo(String nombreArchivo, String prmTexto)  {
+    /**
+     * Escribe en el archivo cuyo nombre está dado por "nombreArchivo" el texto
+     * dado por "prmTexto". Si el archivo no existe, se crea.
+     *
+     * @param nombreArchivo archivo sobre el que se va a escribir
+     * @param prmTexto texto a escribir
+     */
+    public static void escribirArchivo(String nombreArchivo, String prmTexto) {
         File varArchivo = new File(nombreArchivo);
         FileWriter varEscritor;
         BufferedWriter varBufferEscritor;
@@ -86,7 +104,7 @@ public class UtilidadesArchivosTxt {
             }
         }
         try {
-            varEscritor = new FileWriter(varArchivo.getAbsoluteFile(),true);
+            varEscritor = new FileWriter(varArchivo.getAbsoluteFile(), true);
             varBufferEscritor = new BufferedWriter(varEscritor);
             varBufferEscritor.write(prmTexto);
             varBufferEscritor.flush();
